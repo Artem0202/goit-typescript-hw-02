@@ -46,7 +46,7 @@ export default function App() {
       try {
         setError(false);
         setIsLoading(true);
-        const data: any = await fetchPhotos(query, page);
+        const data: Array<Object> = await fetchPhotos(query, page);
         setPhotos((prevPhotos) => {
           return [...prevPhotos, ...data];
         });
