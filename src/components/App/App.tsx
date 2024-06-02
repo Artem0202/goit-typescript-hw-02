@@ -8,8 +8,14 @@ import ImageModal from "../ImageModal/ImageModal";
 import { fetchPhotos } from "../../photos-api";
 import css from "./App.module.css";
 
+interface Photos {
+  id: string;
+  alt_description: string;
+  urls: { small: string; regular: string };
+}
+
 export default function App() {
-  const [photos, setPhotos] = useState<Array<any>>([]);
+  const [photos, setPhotos] = useState<Photos[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [error, setError] = useState<boolean>(false);
   const [modalIsOpen, setIsOpen] = useState<boolean>(false);
@@ -46,7 +52,7 @@ export default function App() {
       try {
         setError(false);
         setIsLoading(true);
-        const data: Array<Object> = await fetchPhotos(query, page);
+        const data: Photos[] = await fetchPhotos(query, page);
         setPhotos((prevPhotos) => {
           return [...prevPhotos, ...data];
         });
